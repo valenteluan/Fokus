@@ -7,11 +7,22 @@ const botoes = document.querySelectorAll('.app__card-button');
 const botaoIniciar = document.querySelector('.app__card-primary-button');
 const displayTempo = document.querySelector('#timer');
 const banner = document.querySelector('.app__image');
-const titulo = document.querySelector('.app__title')
+const titulo = document.querySelector('.app__title');
+const musicaFotoInput = document.querySelector('#alternar-musica');
+const musica = new Audio('/sons/luna-rise-part-one.mp3');
+musica.loop = true;
 
 const duracaoFoco = 1500; 
 const duracaoDescansoCurto = 300; 
 const duracaoDescansoLongo = 900; 
+
+musicaFotoInput.addEventListener('change', () => {
+    if (musica.paused) {
+        musica.play();
+    } else {
+        musica.pause();
+    }
+})
 
 focoBt.addEventListener('click', () => {
     alterarContexto('foco');
