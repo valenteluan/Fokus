@@ -20,12 +20,8 @@ const somZero = new Audio('/sons/beep.mp3');
 musica.loop = true;
 somPlay.pause = true;
 
-let tempoDecorridoEmSegundos = 5;
+let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null;
-
-const duracaoFoco = 1500; 
-const duracaoDescansoCurto = 300; 
-const duracaoDescansoLongo = 900; 
 
 musicaFotoInput.addEventListener('change', () => {
     if (musica.paused) {
@@ -36,21 +32,25 @@ musicaFotoInput.addEventListener('change', () => {
 })
 
 focoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 1500;
     alterarContexto('foco');
     focoBt.classList.add('active');
 })
 
 curtoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 300;
     alterarContexto('descanso-curto');
     curtoBt.classList.add('active');
 })
 
 longoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 900;
     alterarContexto('descanso-longo');
     longoBt.classList.add('active');
 })
 
 function alterarContexto(contexto) {
+    mostrarTempo();
     botoes.forEach(function (contexto) {
         contexto.classList.remove('active')
     })
@@ -114,8 +114,9 @@ function zerar() {
 }
 
 function mostrarTempo() {
-    const tempo = tempoDecorridoEmSegundos;
-    displayTempo.innerHTML = `${tempo}`;
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000);
+    const tempoFormatado = tempo.toLocaleTimeString('pt-br', {minute: '2-digit', second: '2-digit'});
+    displayTempo.innerHTML = `${tempoFormatado}`;
 }
 
 //Função para deixar o tempo fixado na tela
