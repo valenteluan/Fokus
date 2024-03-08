@@ -13,6 +13,13 @@ const musicaFotoInput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3');
 musica.loop = true;
 
+const somPlay = new Audio('/sons/play.wav');
+const somPause = new Audio('/sons/pause.mp3');
+const somZero = new Audio('/sons/beep.mp3');
+
+musica.loop = true;
+somPlay.pause = true;
+
 let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
 
@@ -75,6 +82,7 @@ function alterarContexto(contexto) {
 
 const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0 ) {
+        somZero.play();
         zerar()
         alert('Tempo finalizado!');
         return
@@ -88,9 +96,11 @@ starPauseBt.addEventListener('click', iniciarOuPausar);
 
 function iniciarOuPausar() {
     if (intervaloId) {
+        somPause.play();
         zerar();
         return
     }
+    somPlay.play();
     intervaloId = setInterval(contagemRegressiva, 1000);
 }
 
