@@ -5,6 +5,7 @@ const longoBt = document.querySelector('.app__card-button--longo');
 const botoes = document.querySelectorAll('.app__card-button');
 const starPauseBt = document.querySelector('#start-pause');
 const iniciarOuPausarBt = document.querySelector('#start-pause span');
+const iconeTroca = document.querySelector('.app__card-primary-butto-icon');
 
 const botaoIniciar = document.querySelector('.app__card-primary-button');
 const displayTempo = document.querySelector('#timer');
@@ -104,10 +105,12 @@ function iniciarOuPausar() {
     somPlay.play();
     intervaloId = setInterval(contagemRegressiva, 1000);
     iniciarOuPausarBt.textContent = "Pausar";
+    iconeTroca.setAttribute('src', '/imagens/pause.png');
 }
 
 function zerar() {
     clearInterval(intervaloId);
     iniciarOuPausarBt.textContent = "Começar";
+    iconeTroca.setAttribute('src', '/imagens/play_arrow.png');
     intervaloId = null;
 }
